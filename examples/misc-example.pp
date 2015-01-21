@@ -4,9 +4,6 @@
 # however, i do think this is a great module! please check out the code,
 # and if you need more documentation and/or examples, please contact me!
 
-# most users will find this idiom very helpful so that puppet leaves $FW as $FW
-$FW = '$FW'				# make using $FW in shorewall easier...
-
 class { '::shorewall::configuration':
 	# NOTE: no configuration specifics are needed at the moment
 }
@@ -24,7 +21,7 @@ shorewall::interface { "${zone}":
 	options => ['tcpflags', 'routefilter', 'nosmurfs', 'logmartians'],
 }
 
-shorewall::policy { "$FW-${zone}":	# from the fw to the zone
+shorewall::policy { "\$FW-${zone}":	# from the fw to the zone
 	policy => 'ACCEPT',
 }
 
@@ -36,7 +33,7 @@ shorewall::policy { "${zone}-all":
 # define a rule in the traditional shorewall way:
 $net = $zone	# you may use your own variables!
 shorewall::rule { 'kerberos': rule => "
-Kerberos/ACCEPT  ${net}    $FW
+Kerberos/ACCEPT  ${net}    \$FW
 ", comment => 'Allow Kerberos for krb5 server on tcp/udp port 88.'}
 
 # define a rule using the "library" friendly way.

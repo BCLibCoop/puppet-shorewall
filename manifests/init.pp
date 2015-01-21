@@ -22,9 +22,6 @@
 # also want to manually include the main shorewall class should they want to
 # modify some of the sane default settings. Example: the firewall zone name.
 
-# NOTE: it is recommended that you do this in the scope you're using shorewall
-$FW = '$FW'				# make using $FW in shorewall easier
-
 class shorewall(
 	$fw = 'fw'	# change to rename the fw zone
 ) {
@@ -573,12 +570,12 @@ define shorewall::rule(
 		}
 
 		# BUG: lol: https://projects.puppetlabs.com/issues/15813
-		$source_ips_array = type($source_ips) ? {
+		$source_ips_array = type3x($source_ips) ? {
 			'array' => $source_ips,
 			default => [$source_ips],
 		}
 
-		$dest_ips_array = type($dest_ips) ? {
+		$dest_ips_array = type3x($dest_ips) ? {
 			'array' => $dest_ips,
 			default => [$dest_ips],
 		}
