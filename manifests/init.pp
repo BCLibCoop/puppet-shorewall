@@ -39,7 +39,7 @@ class shorewall(
 	file { '/usr/share/shorewall/macro.Puppet':
 		owner => root,
 		group => root,
-		mode => 644,	# u=rw,go=r
+		mode => '0644',	# u=rw,go=r
 		source => 'puppet:///modules/shorewall/macros/macro.Puppet',
 		alias => 'macro-puppet',
 		require => Package['shorewall'],
@@ -49,7 +49,7 @@ class shorewall(
 	file { '/usr/share/shorewall/macro.VRRP':
 		owner => root,
 		group => root,
-		mode => 644,	# u=rw,go=r
+		mode => '0644',	# u=rw,go=r
 		source => 'puppet:///modules/shorewall/macros/macro.VRRP',
 		alias => 'macro-vrrp',
 		require => Package['shorewall'],
@@ -59,7 +59,7 @@ class shorewall(
 	file { '/usr/share/shorewall/macro.Kerberos':
 		owner => root,
 		group => root,
-		mode => 644,	# u=rw,go=r
+		mode => '0644',	# u=rw,go=r
 		source => 'puppet:///modules/shorewall/macros/macro.Kerberos',
 		alias => 'macro-kerberos',
 		require => Package['shorewall'],
@@ -97,7 +97,7 @@ class shorewall::configuration(
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -106,7 +106,7 @@ class shorewall::configuration(
 		content => template('shorewall/shorewall.conf.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -125,7 +125,7 @@ class shorewall::directory(
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		source => $source,
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
@@ -149,7 +149,7 @@ class shorewall::pattern(
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		source => "puppet:///modules/shorewall/${valid_pattern}/",
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
@@ -162,7 +162,7 @@ class shorewall::zone::base {
 		content => template('shorewall/base/zones.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -174,7 +174,7 @@ class shorewall::zone::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -205,7 +205,7 @@ define shorewall::zone(
 		content => template('shorewall/zone.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
@@ -218,7 +218,7 @@ class shorewall::policy::base {
 		content => template('shorewall/base/policy.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -230,7 +230,7 @@ class shorewall::policy::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -350,7 +350,7 @@ define shorewall::policy(
 		content => template('shorewall/policy.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
@@ -363,7 +363,7 @@ class shorewall::interface::base {
 		content => template('shorewall/base/interfaces.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -375,7 +375,7 @@ class shorewall::interface::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -397,7 +397,7 @@ define shorewall::interface(
 		content => template('shorewall/interface.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
@@ -410,7 +410,7 @@ class shorewall::rule::base {
 		content => template('shorewall/base/rules.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -422,7 +422,7 @@ class shorewall::rule::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -637,7 +637,7 @@ define shorewall::rule(
 		content => template('shorewall/rule.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
@@ -650,7 +650,7 @@ class shorewall::masq::base {
 		content => template('shorewall/base/masq.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -662,7 +662,7 @@ class shorewall::masq::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -685,7 +685,7 @@ define shorewall::masq(
 		content => template('shorewall/masq.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
@@ -698,7 +698,7 @@ class shorewall::nat::base {
 		content => template('shorewall/base/nat.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -710,7 +710,7 @@ class shorewall::nat::base {
 		force => true,			# also purge subdirs and links
 		owner => root,
 		group => nobody,
-		mode => 600,
+		mode => '0600',
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 	}
@@ -741,7 +741,7 @@ define shorewall::nat(
 		content => template('shorewall/nat.erb'),
 		owner => root,
 		group => root,
-		mode => 600,	# u=rw
+		mode => '0600',	# u=rw
 		notify => Service['shorewall'],
 		require => Package['shorewall'],
 		ensure => $ensure,
